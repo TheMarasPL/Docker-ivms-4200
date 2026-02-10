@@ -58,7 +58,3 @@ docker compose exec ivms-4200 tail -n 200 /opt/ivms/logs/install.log
 - Change default credentials before exposing beyond localhost.
 - Prefer VPN or SSH tunnel for remote access.
 - iVMS/Wine runs with user-level permissions (`ivms`), not root.
-
-## CI/CD
-
-A GitHub Actions workflow is included at `.github/workflows/docker-build-main.yml` and runs on every push to `main` (and manually via `workflow_dispatch`) to build the Docker image.
