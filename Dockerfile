@@ -22,6 +22,10 @@ RUN dpkg --add-architecture i386 \
     dbus-x11 \
     xauth \
     xvfb \
+    x11vnc \
+    novnc \
+    websockify \
+    openbox \
     xterm \
     cabextract \
     unzip \
@@ -65,7 +69,8 @@ RUN chmod +x /usr/local/bin/xsession-ivms.sh \
 COPY scripts/install-ivms.sh /usr/local/bin/install-ivms.sh
 COPY scripts/start-ivms.sh /usr/local/bin/start-ivms.sh
 COPY scripts/entrypoint.sh /entrypoint.sh
-RUN chmod +x /usr/local/bin/install-ivms.sh /usr/local/bin/start-ivms.sh /entrypoint.sh
+COPY scripts/start-browser-desktop.sh /usr/local/bin/start-browser-desktop.sh
+RUN chmod +x /usr/local/bin/install-ivms.sh /usr/local/bin/start-ivms.sh /usr/local/bin/start-browser-desktop.sh /entrypoint.sh
 
 # Supervisor + XRDP config
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -77,7 +82,7 @@ RUN sed -i 's/^port=.*/port=3389/' /etc/xrdp/xrdp.ini \
 RUN mkdir -p /opt/ivms/installer /opt/ivms/logs \
  && chown -R ${XRDP_USER}:${XRDP_USER} /opt/ivms
 
-EXPOSE 3389
+EXPOSE 3389 6080
 VOLUME ["/opt/ivms/installer", "/home/ivms/.wine", "/opt/ivms/logs"]
 
 ENTRYPOINT ["/entrypoint.sh"]
