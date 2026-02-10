@@ -4,6 +4,7 @@ services:
     container_name: ivms-4200
     ports:
       - "3389:3389"
+      - "6080:6080"
     environment:
       - AUTO_INSTALL_IVMS=1
     volumes:
