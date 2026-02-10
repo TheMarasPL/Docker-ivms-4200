@@ -9,10 +9,10 @@ services:
       - AUTO_INSTALL_IVMS=0
     volumes:
       - ./installer:/opt/ivms/installer
-      - ivms_wine:/home/ivms/.wine
+      - ivms_wine32:/home/ivms/.wine32
       - ivms_logs:/opt/ivms/logs
     restart: unless-stopped
 
 volumes:
-  ivms_wine:
+  ivms_wine32:
   ivms_logs:
