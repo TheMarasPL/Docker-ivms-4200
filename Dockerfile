@@ -1,8 +1,8 @@
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    WINEPREFIX=/home/ivms/.wine \
-    WINEARCH=win64 \
+    WINEPREFIX=/home/ivms/.wine32 \
+    WINEARCH=win32 \
     DISPLAY=:10 \
     XRDP_USER=ivms
 
@@ -83,6 +83,6 @@ RUN mkdir -p /opt/ivms/installer /opt/ivms/logs \
  && chown -R ${XRDP_USER}:${XRDP_USER} /opt/ivms
 
 EXPOSE 3389 6080
-VOLUME ["/opt/ivms/installer", "/home/ivms/.wine", "/opt/ivms/logs"]
+VOLUME ["/opt/ivms/installer", "/home/ivms/.wine32", "/opt/ivms/logs"]
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -12,6 +12,8 @@ This repository provides a Docker image that runs **Hikvision iVMS-4200 (Windows
 
 > Note: Hikvision does not provide an official Linux container package for iVMS-4200. Some hardware-accelerated/codec-specific features may still depend on your host, camera stream format, and Wine compatibility.
 
+> This image uses a **32-bit Wine prefix** (`WINEARCH=win32`) because iVMS-4200 installers commonly crash under WOW64 prefixes in containers.
+
 ## Prerequisites
 
 1. Put the official iVMS installer (`.exe` or `.msi`) into `./installer/`.
@@ -41,7 +43,7 @@ If you still want the old best-effort silent install attempt on container startu
 ## Volumes
 
 - `./installer:/opt/ivms/installer` – place iVMS installer here.
-- `ivms_wine:/home/ivms/.wine` – persistent Wine prefix (keeps installed app/settings).
+- `ivms_wine32:/home/ivms/.wine32` – persistent Wine prefix (keeps installed app/settings).
 - `ivms_logs:/opt/ivms/logs` – logs from supervisor/XRDP/noVNC/installation.
 
 ## Useful commands
