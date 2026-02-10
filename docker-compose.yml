@@ -1,0 +1,17 @@
+services:
+  ivms-4200:
+    build: .
+    container_name: ivms-4200
+    ports:
+      - "3389:3389"
+    environment:
+      - AUTO_INSTALL_IVMS=1
+    volumes:
+      - ./installer:/opt/ivms/installer
+      - ivms_wine:/home/ivms/.wine
+      - ivms_logs:/opt/ivms/logs
+    restart: unless-stopped
+
+volumes:
+  ivms_wine:
+  ivms_logs:
