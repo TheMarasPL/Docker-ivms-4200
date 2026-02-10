@@ -6,7 +6,7 @@ services:
       - "3389:3389"
       - "6080:6080"
     environment:
-      - AUTO_INSTALL_IVMS=1
+      - AUTO_INSTALL_IVMS=0
     volumes:
       - ./installer:/opt/ivms/installer
       - ivms_wine:/home/ivms/.wine

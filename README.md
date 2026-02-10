@@ -7,8 +7,8 @@ This repository provides a Docker image that runs **Hikvision iVMS-4200 (Windows
 - Installs Wine (64-bit + 32-bit support) and common runtime dependencies.
 - Runs XRDP so you can connect with any RDP client.
 - Runs a persistent virtual desktop (`Xvfb`) and publishes it in the browser via `x11vnc + noVNC`.
-- Starts iVMS-4200 in that desktop session.
-- Supports auto-install from an installer you mount into the container.
+- Starts iVMS-4200 in that desktop session when already installed.
+- Supports first-login manual install, with optional auto-install if you enable it.
 
 > Note: Hikvision does not provide an official Linux container package for iVMS-4200. Some hardware-accelerated/codec-specific features may still depend on your host, camera stream format, and Wine compatibility.
 
@@ -34,7 +34,9 @@ docker compose up -d
 - Username: `ivms`
 - Password: `ivms`
 
-On first start, the container tries a best-effort silent install. If silent flags are not supported by your installer variant, connect over RDP or noVNC and complete the installer manually.
+On first login, if iVMS-4200 is not installed yet, the container launches the mounted installer interactively so you can complete the install manually. On later logins, it starts iVMS-4200 directly when found in the Wine prefix.
+
+If you still want the old best-effort silent install attempt on container startup, set `AUTO_INSTALL_IVMS=1` (default in this repo is `0`).
 
 ## Volumes
 

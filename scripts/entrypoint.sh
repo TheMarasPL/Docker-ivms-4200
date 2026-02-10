@@ -7,8 +7,8 @@ XRDP_USER="${XRDP_USER:-ivms}"
 mkdir -p /var/run/dbus /var/run/xrdp /opt/ivms/logs
 chown -R "${XRDP_USER}:${XRDP_USER}" /opt/ivms /home/${XRDP_USER}
 
-# Auto-run installer if an installer was mounted
-if [ "${AUTO_INSTALL_IVMS:-1}" = "1" ]; then
+# Auto-run installer only when explicitly enabled
+if [ "${AUTO_INSTALL_IVMS:-0}" = "1" ]; then
   su - "${XRDP_USER}" -c "/usr/local/bin/install-ivms.sh" || true
 fi
 
